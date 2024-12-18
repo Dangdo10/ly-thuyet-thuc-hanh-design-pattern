@@ -1,0 +1,15 @@
+Behavioral Pattern: là nhóm tương tác, hành vi gồm 11 mẫu:
+1. Interpreter
+2. Template Method
+3. Chain of Responsibility
+4. Command
+5. Iterator
+6. Mediator
+7. Memento
+8. Observer
+9. State
+10. Strategy
+11.Visitor
+
+=> Nhóm này dùng trong thực hiện các hành vi của đối tượng,
+sự giao tiếp giữa cc object với nhau.

@@ -1,0 +1,13 @@
+Structural Pattern: là nhóm cấu trúc gồm 7 mẫu:
+1. Adapter
+2. Bridge
+3. Composite
+4. Decorator
+5. Facade
+6. Flyweight
+7. Proxy
+
+=> Những loại pattern này liên quan tới class và các thành phần
+của object. Nó dùng đẻ thiết lập, định nghĩa quan hệ giữa các
+đối tượng.
+

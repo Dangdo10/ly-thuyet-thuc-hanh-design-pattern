@@ -1,0 +1,13 @@
+Creational Pattern là nhóm khởi tạo gồm 5 mẫu:
+1. Factory Method
+2. Abstract Factory
+3. Builder
+4. Prototype
+5. Singleton
+
+=> Đây là looại cung cấp một giải pháp để tạo ra các object và
+che giấu được logic của việc tạo ra nó, thay vì tạo ra object
+một các trực tiếp bằng cách sử dụng method new. Điều này giúp
+cho chương trình trở nên mềm dẻo hơn trong việc quyết định
+object nào cần được tạo ra trong những tình huống được đưa ra.
+
