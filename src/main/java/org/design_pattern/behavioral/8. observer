@@ -1,4 +1,7 @@
-Observer:
+Observer: được hệ thống hóa qua cuốn sách "Design Pattern,
+Elements of Reusable Object-Oriented Software" của 4 tác giả
+Erich Gamma, Richard Helm, Ralph Johnson và John Vlissides xuất
+bản năm 1994.
 * Định nghĩa sự phụ thuộc một-nhiều giữa các đối tượng sao cho
 khi một ối tượng thay đổi trạng thái thì tất cả các đối tượng
 phụ thuộc nó cũng thay đổi theo
@@ -58,3 +61,37 @@ nhận được thông báo rằng có thao tác với user và gọi tới phư
 thức update(), các ConcreteObserver sẽ sử dụng dữ liệu SubjectState
 để xử lý.
 thực hành xem ví dụ ở folder example
+
+------------------------------------------------
+Ứng dụng thực tiễn của Observer:
+Nếu phải dùng 2 từ mô tả về observer pattern là: "thông báo" hoặc
+"Quan sát".
+4 chữ thì là "Thông báo sự thay đổi"
+Các ứng dụng lớn và phức tạp trong thực tế
+1.Hệ thống giao diện người dùng (UI) động
+ ví du: bảng điều khiển tài chính, khi dữ liệu giá cổ phiếu thay đổi
+ hệ thống sẽ thông báo cho tất cả các biểu đồ và bảng số liệu để chúng
+ tự động cập nhật giá trị mới nhất mà không cần phải tái khởi
+ động hay thay đổi mã trong mỗi component.
+2. Hệ thống quản lý sự kiện trong ứng dụng
+ ví dụ: trong ứng dụng game. Khi một sự kiện xảy ra ví như người chơi
+ nhận được vật phẩm hoặc thay đổi cấp độ ... thì tất cả các observers(
+ có thể là màn hình thông báo, bản đồ,...) sẽ nhận thông tin và cập
+ nhật trạng thái tương ứng.
+3. Hệ thống phân tán và đồng bộ dữ liệu
+ ví dụ: Trong 1 hệ thống e-commerce lớn với nhiều dịch vụ microservices,
+ khi một sản phẩm được cập nhật, hệ thống sẽ thông báo đến các dịch vụ
+ khác để tự động cập nhật và đồng bộ trạng thái của chúng.
+4. Hệ thống cảnh báo, an ninh, giám sát
+5. Hệ thống xử lý sự kiện bất đồng bộ
+6. ứng dụng chat
+ ví dụ khi một người gửi tin nhắn thì toàn bộ người đang kết nối sẽ nhận
+ được tin nhắn.
+
+ Trong một hệ thống sử dụng observer mỗi khi có một sự thay đổi
+ từ phía observers thì các observer khác nhau có thể có chung
+ một hành động(vi dụ đều nhận được tin nhắn chat trong 1 group) hoặc các
+ observer có thể thực hiện các logic khác nhau
+ ví dụ như có một sự kiện thay đổi có thể có 2 luồng đại diện cho
+ 2 observer như email, sms. Mỗi observer thực hiện một công việc
+ khác nhau dựa trên thông báo chung về sự thay đổi.
