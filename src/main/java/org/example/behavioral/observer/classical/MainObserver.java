@@ -1,4 +1,4 @@
-package org.example.behavioral.observer;
+package org.example.behavioral.observer.classical;
 
 public class MainObserver {
     public static void main(String[] args) {
