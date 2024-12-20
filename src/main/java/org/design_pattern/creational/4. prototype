@@ -35,3 +35,26 @@ có thể clone() toàn bộ việc cài đặt cho một máy mới.
     Sau cùng, mỗi khi có nhân viên mới, chỉ việc clone() từ
     computer chuẩn đã tạo. Tùy theo nhu cầu của mỗi nhân viên
     có thể thay đổi lại cho phù hợp(setOther()).
+
+Lợi ích khi sử dụng Prototype Pattern.
+1. Cải thiện performance: Giảm chi phí để tạo ra 1 đối tượng mới
+theo chuẩn, điều ny sẽ làm tăng hiệu suất so với việc sử dụng từ
+khóa new.
+2. Giảm độ phức tạp cho việc khởi tạo đối tượng
+3. Giảm việc phân lớp, tránh việc tạo nhiều lớp con cho việc khởi
+tạo đối tượng
+4. Khởi tạo object mới bằng cách thay đổi 1 vài thuộc tính của
+object
+5. Khởi tạo object mới bằng cách thay đổi cấu trúc
+
+Sử dụng prototype khi nào?
+Vì sao không khởi tạo object mới bằng toán tử new? Vì chúng ta ko
+hề được biết thông tin nội tại của object đó hoặc object đó đã
+có thể bị che dấu đi nhiều thng tin khác mà chỉ cho ta một thông
+tin rất giới hn không đủ để hiểu được.
+Cấu hình 1 ứng dụng dynamic class.
+Muốn truyền đối tượng vào một hàm nào đó để xử lý, thay vì truyền
+đối tượng gốc có thể ảnh hưởng tới dữ liệu thì ta truyền đối tượng
+sao chép.
+Chi phí của việc tạo đối tượng bằng new có thể lướn.
+Ẩn độ phức tjap của việc khởi tạo đối tượng từ phía client.
