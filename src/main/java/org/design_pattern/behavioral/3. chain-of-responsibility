@@ -35,3 +35,17 @@ Nếu xin nghỉ <=3 ngày thì supervisor có thể phê duyệt(approve).
 Nếu xin nghỉ <=5 ngày thì DeliveryManager có thể approve. Nếu
 xin nghỉ > 5 ngày thì phải được approve bởi Director. Quy trình
 ngày có thể linh động tùy theo quy mô phát triển công ty.
+
+
+====================
+Tại sao lại phải sử dng Chain Of Responsibility?
+1. Giảm sự phụ thuộc giữa các lớp: Các lớp xử lý không cần biết ai
+xử lý yêu cầu tiếp theo, điều này giúp bạn dễ dàng thay đổi hoặc
+thêm các lớp mới vào chuỗi mà không làm ảnh hưởng đến phần còn
+lại của hệ thống.
+2. Tăng tính linh hoạt và khả năng mở rộng: Nếu bạn muốn thay đổi
+thứ tự xử lý hoặc thêm các bước xử lý mới, bạn chỉ cần thay đổi
+chuỗi các đối tượng mà không thay đổi mã xử lý chính.
+3. Đơn giản hóa mã nguồn: Việc phân chia các yêu cầu xử lý thành
+các lớp khác nhau giúp mã nguồn trở nên dễ hiểu và dễ bảo trì hơn.
+
