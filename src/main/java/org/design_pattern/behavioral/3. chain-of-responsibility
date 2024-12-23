@@ -1,0 +1,37 @@
+Chain of Responsibility Pattern: là một trong những pattern thuộc
+nhóm hành vi.
+Chain of Responsibility cho phép một đối tượng gửi yêu cầu nhưng không
+biết đối tượng nào sẽ nhận và xử lý nó. Điều này được thực hiện
+bằng cách kết nối các đối tượng nhận yêu cầu thành một chuỗi(chain)
+và gửi yêu cầu theo chuỗi đó cho đến khi có một đối tượng xử lý nó.
+Chain of Responsibility hoạt động như một danh sách liên kết với
+việc đệ quy duyệt qua các phần tử.
+2. Cài đặt
+Các thành phần chính:
+Handler: Định nghĩa 1 interface để xử lý các yêu cầu. Gán giá trị
+cho đối tượng successor( không bắt buộc).
+ConcreteHandler: Xử lý yêu cầu. Có thể truy cập đối tượng successor
+Nếu đối tượng ConcreteHandler không thể xử lý được yêu cầu, nó sẽ
+gửi yêu cầu cho successor của nó
+Client: Tạo ra các yêu cầu, và yêu cầu đó sẽ được gửi đến các đối
+tượng tiếp nhận.
+
+Ví dụ chương trình Logger
+Chúng ta sẽ tự xây dựng hệ thống Logger cho riêng mình như sau:
+Logger: Là một abstract class Handler, cho phép thực hiện một
+chain logger dựa vào giá trị LogLevel ứng với từng handler. Nếu
+mức độ lỗi lớn hơn hoặc bằng với LogLevel mà nó có thể handler
+thì sẽ thực hiện writeMessage(), đồng thời gọi Handler kế tiếp
+nếu có.
+ConsoleLogger, File Logger, EmailLogger: Đây là các ConcreteHandler
+nó xác định Loglevel mà nó có thể xử lý, và cài đặt phương thức
+writeMessage() cho riêng nó.
+Client: sử dụng Logger để ghi log.
+LogLevel: là một enum, dùng để xác định mức độ ghi log.
+AppLogger: là một lớp tiện ích, tạo chuỗi Handler để xử lý ghi log.
+
+Ví dụ 2: Ứng dụng phê duyệt xin nghỉ phép
+Nếu xin nghỉ <=3 ngày thì supervisor có thể phê duyệt(approve).
+Nếu xin nghỉ <=5 ngày thì DeliveryManager có thể approve. Nếu
+xin nghỉ > 5 ngày thì phải được approve bởi Director. Quy trình
+ngày có thể linh động tùy theo quy mô phát triển công ty.
