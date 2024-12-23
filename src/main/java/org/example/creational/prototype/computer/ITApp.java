@@ -1,4 +1,4 @@
-package org.example.creational.prototype.vidu1;
+package org.example.creational.prototype.computer;
 
 public class ITApp {
 

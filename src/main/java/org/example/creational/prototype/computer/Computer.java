@@ -1,6 +1,4 @@
-package org.example.creational.prototype.vidu1;
-
-import javax.swing.plaf.ComponentUI;
+package org.example.creational.prototype.computer;
 
 public class Computer implements Cloneable {
     private String os;
