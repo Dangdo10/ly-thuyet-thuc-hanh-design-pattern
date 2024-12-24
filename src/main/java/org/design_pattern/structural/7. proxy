@@ -1,0 +1,145 @@
+Proxy Pattern: nghĩa là "ủy quyền" hay "đại diện". Mục đích xây dựng
+Proxy pattern cũng chính vì muốn tạo ra ột đối tượng sẽ ủy quyền, thay
+thế cho một đối tượng khác.
+Proxy Pattern là mẫu thiết kế mà ở đó tất cả các truy cập trực tiếp
+đến 1 đối tượng nào đó sẽ được chuyển hướng vào một đối tượng trung
+gian(Proxy Class). Mẫu Proxy( người đại diện) đại diện cho 1 đối
+tượng khác thực thi các phương thức, phương thức đó có thể được định
+nghĩa lại cho phù hợp với mục đích sử dụng.
+
+Ví dụ Http Proxy là gateway giữa trình duyệt(client) và máy chủ
+(server), nó giúp nâng cao trải nghim người dùng, tăng tốc với lưu
+đệm các dữ liệu, loại bỏ các trang quảng cáo, giới hạn các vùng
+thông tin được xem.
+Proxy Pattern còn được gọi là Surogate(thay thế) hoặc Placeholder
+(trình giữ chỗ)
+
+---------------
+Phân loại Proxy
+1. Virtual Proxy: tạo ra một đối tượng trung gian mỗi khi có yêu
+cầu tại thời điểm thực thi ứng dụng, nhờ đó làm tăng hiệu suất
+của ứng dụng.
+2. Protection Proxy: Phạm vi truy cập của các client khác nhau sẽ
+khác nhau. Nó sẽ kiểm tra các quyền truy cập của client khi có
+một dịch vụ được yêu cầu.
+3. Remote Proxy: client truy cập qua remote proxy để chiếu tới 1
+đối tượng được bảo về nằm bên ngoài ứng dụng
+4. Monitor Proxy: thiet lập các bảo mật trên đối tượng cần bảo vệ,
+ngăn ko cho client truy cập 1 số trường quan trọng của đối tượng.
+Co thể theo dõi, giám sát, ghi log việc truy cập, sử dụng của đối
+tượng.
+5. Firewall Proxy: bảo vệ đối tượng từ chối các yêu cầu xuất xứ từ
+các client không tín nhiệm.
+6. Cache Proxy: Cung cấp không gian lưu trữ tạm thời cho các kết
+qua trả về từ đối tượng nào đó.
+7. Smart Reference Proxy: là nơi kiểm soát các hoạt động bổ sung
+mỗi khi đối tượng đc tham chiếu.
+8. Synchronization Proxy: đảm bảo nhiều client có thể truy cập
+vào cùng 1 đối tượng mà ko gây ra xung đột. Khi 1 client nào đó
+chiếm dụng khóa khá lâu khiến cho số lưng các client trong danh
+sách hàng đợi cứ tăng lên, và do đó hoạt động của hệ thống bị
+ngừng trệ, có thể dẫn đến hiện tượng " tắc nghẽn"
+9. Copy-on-write: loại này đảm bảo rằng ko có client phải chờ vô
+thời hạn.
+
+
+-------------------
+Cài đặt
+Proxy pattern có các thành phần và đặc điểm cơ bản sau:
+1. Cung cấp mức truy cập gián tiếp vào 1 đối tượng.
+2. tham chiếu vào đối tượng đích và chuyển tếp cac yêu cầu
+đến đối tượng đó.
+3. Cả proxy và đ ối tượng đích đều kế thừa hoặc thực thi chung 1
+lớp giao diện.
+
+thàn phần chính:
+Subject: là 1 interface định nghĩa các phương thức để giao tiếp
+với client. Đối tượng này xác định giao diện chung cho RealSubject
+và Proxy để proxy có thể được sử dụng bất cứ nơi nào mà realSubject
+mong đợi.
+Proxy: là 1 class sẽ thực hiện các bước kiểm tra và gọi tới đối
+tượng của class service thật để thực hiệnl các thao tác sau khi
+kiem tra. Nó duy trì 1 tham chiếu RealSubject để proxy có thể
+truy cập nó. nó cũng thực hiện các giao diện tương tự như RealSubject
+để Proxy có thể đc sử dụng thay cho realSubject. Proxy cũng điều
+khiển truy cập vào RealSubject và có thể tạo hoặc xóa đối tượng
+này.
+RealSubject: là class service sẽ thực hiện các thao tác thực sự.
+Đây là đối tượng chính mà proxy đại diện.
+Client: Đối tượng cần sử dụng RealSubject nhưng thông qua Proxy.
+
+
+-------------------------
+Ví dụ về Virtual Proxy
+Trì hoãn việc tạo ra real subject bên trong proxy class. Chỉ đến
+khi cần, proxy class mới thật sự khởi tạo real class. Loại
+proxy ngày làm việc theo cơ chế lazy loading.
+"Lazy loading là 1 khái niệm mà ứng dụng trì hoãn việc tải các đối
+tượng cho đến thời điểm mà người dùng cần nó. Nói một cách đơn giản
+là tải theo yêu cau của người dùng chứ không phải tải đối tượng
+không cần thiết. Lợi ích của việc này là giảm thiểu số lượng yêu
+cầu, giảm thieu so lượng tài nguyên thừa cần tải cho tới khi người
+dùng cần đến chúng thực sự"
+Nó giải quyết vấn đề rất lớn về hiệu suất, lý do vì proxy class
+có chi phí khởi tạo rất ít, việc duy trì nó không mất nhiều tài
+nguyên hệ thống. Trong khi đó real class thường tốn chi phí, vì
+thế với virtual proxies, chỉ khi nào cần thiết, real class mới
+đc khởi tạo.
+
+Ví dụ về một website hiển thị ảnh, có thể có rất nhiều ảnh trên 1
+trang hay 1 ảnh được hiển thị nhiều lần. trường hợp này chúng ta
+chỉ cần load ảnh khi nó cần hiển thị(khi ta scroll tới nơi đặt image)
+hoặc là nó chưa đc load(ko như các website truyền thống là load hình
+ngay khi load website, nó rất tốn tài nguyên và đôi khi ko cần
+thiết do người dùng ko scroll tới nơi đặt image, có thể load 1 ảnh
+nhiều lần)
+
+Ví dụ về Protection proxy
+Yêu cầu người gọi proxy class phải chứng thực trước khi proxy class
+truy xuất vào real class. Cái này rất hữu dụng khi bạn viet library
+cho 1 bên khác sử dụng và yêu cầu họ xác thực trc khi gọi hàm.
+
+--------------------------------
+Lợi ích Proxy Pattern
+1. Cải thiện Performance thông qua lazy loading, chỉ tải các tài
+nguyên khi chúng được yêu cầu.
+2. Nó cung cấp sự bảo vệ cho đối tượng thực từ thế giới bên ngoài.
+3. Giảm chi phí khi có nhiều truy cập vào đối tượng có chi phí khởi
+tạo ban đầu lớn.
+4. Dễ nâng cấp, bảo trì.
+
+---------------------------------
+Su dung proxy khi nào?
+Khi muốn bảo vệ quyền truy xuất vào các phương thức của object thực.
+Khi cần một số thao tác bổ sung trước khi thực hiện phương thức
+của object thực.
+Khi tạo đối tượng ban đầu là theo yêu cầu hoặc hệ thống yêu cầu
+sự chậm trễ khi tải một số tài nguyên nhất định.
+Khi có nhiều truy cập và đối tượng có chi phí khởi tạo ban đầu
+lớn.
+Khi đối tượng gốc tồn tại trong môi trường từ xa.
+Khi đối tượng gốc nằm trong 1 hệ thống cũ hoặc thư viện của bên
+thứ 3.
+Khi muốn theo dõi trạng thái và vòng đời đối tượng.
+
+
+-----------------------
+Sự khác nhau giữa Proxy Pattern và Decorator Pattern.
+Cấu trúc của Proxy Pattern và Decorator Pattern là tương tự
+nhau (bạn có thể coi ở class diagram). Hai Pattern này đều
+Wrap một đối tượng thực bên trong nó. Tuy nhiên, khác nhau
+thật sự giữa Proxy Pattern và Decorator Pattern nằm ở mục đích
+sử dụng. Với Decorator Pattern, người sử dụng sẽ nhắm tới mục
+tiêu là có thể thêm tính năng động vào một đối tượng có trước,
+trong khi đó Proxy Pattern cho phép ta tạo ra một đại diện cho
+một đối tượng khác.
+
+
+
+
+
+
+
+
+
+
