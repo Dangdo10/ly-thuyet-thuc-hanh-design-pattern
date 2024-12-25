@@ -1,0 +1,51 @@
+Factory Method: là mẫu pattern quản lý và trả về các đối tượng theo
+yêu cầu, giúp cho việc khởi tạo đối tượng một cách linh hoạt hơn.
+Factory Pattern đúng nghĩa là 1 nhà máy, và nhà máy này sẽ "sản xuất"
+các đối tượng theo yêu cầu của chúng ta.
+Trong Factory Pattern chúng ta tạo đối tượng mà không để lộ logic
+tạo đối tượng  phía người dng và tham chiếu đến đối tượng mới đc tạo
+ra bằng cách sử dụng 1 interface chung.
+Factory Pattern đc sử dụng khi có 1 class cha(supper-class) với nhiều
+class con(sub-class) dựa trên đầu vào và phải trả về 1 trong những
+class con đó.
+-----------------
+
+Cài đặt:
+1 Factory Pattern bao gồm các thành phần cơ bản sau:
+Super Class: 1 supper class trong Factory pattern có the là 1 interface
+, abstract class hay 1 class thông thường.
+Sub Classes: các sub class sẽ implement các phương thức của super
+class theo nghiệp vụ riêng của nó.
+Factory Class: 1 class chịu trách nhiệm khởi tạo các đối tượng sub
+class dựa theo tham số đầu vào. Lưu ý: lớp này là Singleton hoặc
+cung cấp 1 pulic static method cho vệc truy xuất và khởi tạo đối
+tượng. Factory class sử dụng if-else hoặc swith-case để xác định
+class con đầu ra.
+
+
+-----------
+Ví dụ:
+Tất cả hệ thống ngân hàng có cung cấp API để truy cập đến hệ thống
+của họ. Team đc giao nhiệm vụ thiết kế Api để client có thể sử
+dụng dịch vụ của ngân hàng bất kỳ. Hiện tại, phía client chỉ cần
+sử dụng dịch vụ của 2 ngân hàng là Vietcombank và TpBank. Tuy nhiên
+để dễ mở rộng sau này, và phía client mong muốn không cần phải thay
+đổi code của họ khi cần sử dụng thêm dịch vụ của ngân hàng khác. với
+yêu cầu như vậy, chúng ta có thể sử dụng 1 pattern phù hợp là Factory
+Method Pattern.
+
+----------------
+Lợi ích của factory pattern
+Factory pattern giúp giảm sự phụ thuộc giữa các module(loose coupling)
+cung cấp 1 hướng tiếp cận với interface thay vì các implement.
+Giúp chương trình độc lập vs những lớp cụ thể mà chúng ta cần tạo
+1 đối tượng, code ở phía client không bị ảnh hưởng khi thay đổi
+logic ở factory hay sub class.
+mo rộng code dễ dàng hơn: khi cần mở rng, chỉ viec tạo ra sub class
+và implement thêm vào factory method.
+Khởi tạo các Objects mà che giấu đi xử lý logic của việc khởi tạo
+Người dùng không biết logic thực sự đc khởi tạo bên dưới phương thức
+factory.
+Dễ dàng quản lý file cycle của các object được tạo bởi factory pattern
+Thống nất về naming convention: giúp cho các developer có thể hiểu
+về cấu trúc source code.
