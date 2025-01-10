@@ -1,0 +1,107 @@
+Bridge Pattern: là 1 trong những Pattern thuộc nhóm cấu trúc. ý tuong
+của nó là tách tính trừu tượng( abstraction) ra khỏi tính hiện thực
+(implementation) của nó. Từ đó có thể dễ dàng chỉnh sửa hoặc thay
+thế mà không làm ảnh hưởng đến những nơi có sử dụng lớp ban đầu.
+Điều đó có nghĩa là, ban đầu ta thiết kế 1 class với rất nhiều xử
+lý, bây giờ ta không muốn để những xử lý đó trong class đó nữa.
+Vì thế ta sẽ tạo ra 1 class khac và move các xử lý đó qua class mới.
+Khi đó, trong lop cu se giu 1 doi tuong thuoc ve lop moi, va doi
+tuong nay se chiu trach nhiem xu ly thay cho lop ban dau.
+Bridge pattern kha giong voi mau adapter pattern o cho la se nho
+vao 1 lop khac de xu thuc hien mot so xu ly nao do. Tuy nhien y
+nghia va muc dich su dung cua 2 mau nay nay hoan toan khac nhau:
+Adapter duoc dung de bien doi 1 class/interface sang 1 dang khac
+co the su dung duoc. Giup cac lop khong tuong thich hoat dong cung
+nhau ma binh thuong la khong the.
+Bridge duoc su dung de tach thanh phan truu tuong va thanh phan
+thuc thi rieng biet.
+adapter lam cho moi thu co the hoat dong voi nhau sau khi chung
+da duoc thiet ke. bridge nen duoc thiet ke trc khi phat trien
+he thong de class truu tuong va class trien khai co the thuc
+hien duoc cach doc lap.
+-----------------
+
+Cai dat Bridge;
+Mot Bridge pattern bao gom cac thanh phan sau:
+Client: dai dien cho khach hang su dung cac chuc nang thong qua
+abstraction.
+Abstraction: dinh ra mot abstract interface quan ly viec than chieu
+den doi tuong thuc hien cu the.
+Refined Abstraction(AbstractionImpl): hien thuc cac phuong thuc da
+duoc dinh ra trong abstraction bang cach su dung 1 tham chieu den
+1 doi tuong cua implementer.
+Implementor: dinh ra cac interface cho cac lop hien thuc. thong
+thuong no la interface dinh ra cac tac vu nao do cua abstraction
+ConcreteImplementor: hien thuc implementor interface.
+
+
+Vidu:
+Mot he thong ngan hang cung cap cac loai tai khoan khac nhau cho
+khach hang, chang han: checking account va saving account. chung
+ta co so do nhu sau:
+                    <<Abstract class>>
+                          Bank
+                           ^
+                           |
+                 _ _ _ _ _ | _ _ _ _ _
+                |                     |
+                |                     |
+             TP Bank             VietcomBank
+                |                     |
+        - - - create - -        - - create - - - - - -
+       |               |        |                     |
+CheckingAccount   SavingAccount  CheckingAccount   SavingAccount
+
+Voi so do tren, khi he thong can cung cap them 1 loai tai khoan
+khac, chung ta phai tao class moi cho tat ca cac ngan hang, so luong
+class tang len rat nhieu.
+
+Bay gio, ta se su dung bridge pattern de tai cau truc lai he thong
+tren nhu sau:
+
+  <<Abstract class>>  --------has-A----------  <<Interface>>
+       Bank                                        Account
+        ^                                             ^
+        |                                             |
+    Implement                                     Implement
+  _ _ _ |_ _ _ _                          _ _ _ _ _ _ | _ _ _ _ _ _
+ |              |                        |                         |
+TPBank      VietcomBank              CheckingAccount         SavingAccount
+
+Voi cau truc nhu vay, khi co them 1 tai khoan moi, chung ta don
+gian chi viec them vao 1 implement moi cho Account, cac thanh
+phan khac cua Bank khong bi anh huong. Hoac can them 1 ngan hang
+moi, chung ta chi can  them implement moi cho Bank, cac thanh phan
+khac cung khong bi anh huong va so luong class chi tang len 1.
+<<Code vi du ben duoi>>>
+
+---------------------------------
+Loi ich cua Bridge Patten:
+1. Giam su phu thuoc giua abstraction va implementation: tinh
+ke thua trong oop thuong gan chat abs va impl luc build chuong
+trinh. bridge pattern co the duoc dung de cat dut su phu thuoc
+nay va cho phep chung ta chon impl phu hop luc runtime.
+2. giam so luong nhung lop con khong can thiet: mot so truong hop
+su dung tinh inheritance se tang so luong subclass rat nhieu.
+vd: truong hop chuong trinh view hinh anh tren cac he dieu hanh,
+ta co 6 loai(jpg, png, gif bmp, jpeg, tiff) va 3 he dieu hanh
+(window, macos, ubuntu). su dung inheritance trong truong hop nay
+se lam ta thiet ke 18 lop. trong khi ap dung bridge se giam so
+luong lop xuong 9 lop: 6 lop ung vs tung implement cua image va
+3 lop ung voi he dieu hanh.
+3. Code se gon gang hon va kich thuoc ung dung se nho hon: do
+giam so class khong can thiet.
+4. de bao tri hon: cac abs va impl cua no se de dang thay doi luc
+runtime cung nhu khi can thay doi them bot trong tuong lai.
+5. de dang mo rong ve sau:
+6. cho phep an cac chi tiet impl tu client: do abs va impl hoan
+toan doc lap nen chung ta co the thay doi 1 thanh phan khong anh
+huong den phia client.
+
+---------------------------------
+Su dung Bridge khi nao?
+khi ban muon tach rang buoc giua abs va impl, de co the de dang
+mo rong doc lap nhau.
+Ca abs va impl cua chung nen duoc mo rong bang subclass.
+Su dung o nhung noi ma nhung thay doi duoc thuc hien trong impl
+khong anh huong den phia client.
