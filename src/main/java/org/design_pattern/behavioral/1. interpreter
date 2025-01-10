@@ -1,0 +1,129 @@
+Interpreter Pattern: la mot trong nhung nhom thuoc hanh vi.
+Interpreter nghia la thong dich, mau nay noi rang "de xac dinh mot
+bieu dien ngu phap cua mot ngon ngu cu the, cung voi mot thong dich
+vien su dung bieu dien nay de dien dich cac cau trong ngon ngu".
+nghia la giup nguoi lap trinh co the xay dung nhung doi tuong dong
+bang cach doc mo ta ve doi tuong sau do xay dung doi tuong theo
+dung mo ta do.
+Metadata(mo ta) -> [Interpreter pattern] -> doi tuong tuong ung
+Interpreter pattern co han che ve pham vi ap dung. Mau nay thuong
+duoc su dung de dinh nghia bo ngu phap don gian (grammar), trong
+cac cong cu quy tac don gian (rule),...
+
+-----------------------
+2. CAI DAT
+                        Client - - - - uses - - - -> Context
+                           |
+                        request
+                           !
+                    Expression
+                    interpreter(context) ---------------------+
+                           ^                                  |
+                           |                                call
+        + - - implements - + - - implements +                 |
+        |                                   |                 |
+TerminalExpression              NonTerminalExpression         |
+interpreter(context)            Expression expression -<>-----+
+                                interpreter(context)
+
+
+Cac thanh phan chinh:
+1. Context: la thanh phan chua thong tin bieu dien mau chung ta
+   can xay dung.
+2. Expression: la 1 interface hoac abstract class, dinh nghia
+   phuong thuc interpreter chung cho tat ca cac node trong cau
+   truc cay phan tich ngu phap. Expression duoc bieu dien nhu
+   mot cau truc cay phan cap, moi impl cua Expression co the
+   goi la 1 node.
+3. TerminalExpression (bieu thuc dau cuoi): cai dat cac phuong
+   thuc cua Expression, la nhung bieu thuc co the duoc dien giai
+   trong mot doi tuong duy nhat, chua cac xu ly logic de dua
+   thong tin cua context thanh doi tuong cu the.
+4. NonTerminalExpression (bieu thuc khong dau cuoi): cai dat cac
+   phuong thuc cua Expression, bieu thuc nay chua mot hoac
+   nhieu bieu thuc khac nhau, moi bieu thuc co the la bieu thuc
+   dau cuoi hoac khong phai la bieu thuc dau cuoi. Khi mot
+   phuong thuc interpret() cua lop bieu thuc khong phai la dau
+   cuoi duoc goi, no se goi de quy den tat ca cac bieu thuc
+   khac ma no dang giu.
+5. Client: dai dien cho nguoi dung
+
+
+--------------------------------------------------
+VIDU
+vd1: xay dung ung dung calculator theo ngon ngu tu nhien.
+Client uses InterpreterEngineContext
+request
+
+
+                            +----------------+                  +-----------------------------------+
+                            | Client         |-------uses-----> | Expression                        |
+                            +----------------+                  +-----------------------------------+
+                            |                |                  | int interpret                     |
+                            +----------------+                  | (InterpreterEngineContext context)|
+                                   |                            +-----------------------------------+
+                                request
+                                   !
+                    +-----------------------------------+
+                    | Expression                        |
+                    +-----------------------------------+
+                    | int interpret                     |
+                    | (InterpreterEngineContext context)|
+                    +-----------------------------------+
+                                      ^
+                                      |
+                  + -- -- -- -- -- ---+--- -- -- -- -- -- +
+                  |                                       |
+                  |                                       |
++-----------------------------------+   +-----------------------------------+
+| AddExpression                     |   | SubtractExpression                |
++-----------------------------------+   +-----------------------------------+
+| int interpret                     |   | int interpret                     |
+| (InterpreterEngineContext context)|   | (InterpreterEngineContext context)|
++-----------------------------------+   +-----------------------------------+
+(code vidu ben folder duoi)
+
+
+
+vd2: Chuyen doi chu cai la ma sang so thap phan
+Co bon nguyen tac co ban de doc va viet chu so La Ma:
+    Chu so La Ma duoc the hien bang chu cai cua bang chu cai:
+    I=1; V=5; X=10; L=50; C=100; D=500; M=1000.
+    Mot chu cai co the lap lai gia tri cua no nhieu lan, toi da
+    la 3 lan. Vd: XXX=30, CC=200,...
+    Neu 1 hoac nhieu chu cai duoc dat sau 1 chu cai co gia tri
+    lon hon, cong so truoc do. Vd:
+    VI = 5 + 1 = 6
+    LXX = 50 + 10 + 10 = 70
+    MCC = 1000 + 100 + 100 = 1200
+    Neu mot chu cai duoc dat truoc mot chu cai co gia tri lon hon
+    tru di so truoc do. Vd:
+    IV = 5 -1 = 4
+    XC = 100 - 10 = 90
+    CM = 1000 - 100 = 900
+(code vi du ben folder duoi)
+
+
+---------------------------------------
+4. LOI ICH
+De dang thay doi va mo rong ngu phap. Vi mau nay su dung cac lop
+de bieu dien cac quy tac ngu phap, chung ta co the su dung thua
+ke de thay doi hoac mo rong ngu phap. Cac bieu thuc hien tai co
+the duoc sua doi theo tung buoc va cac bieu thuc moi co the duoc
+dinh nghia lai cac thay doi tren cac bieu thuc cu.
+Cai dat va su dung ngu phap rat don gian. Cac lop xac dinh cac
+nut trong cay cu phap co cac implement tuong tu. Cac lop nay
+de viet va cac phan cap con cua chung co the duoc tu dong hoa
+bang trinh bien dich hoac trinh tao trinh phan tich cu phap.
+
+------------------------------------------
+5. SU DUNG KHI NAO?
+Interpreter pattern duoc su dung hieu qua khi:
++, Bo ngu phap don gian: Pattern nay can xac dinh it nhat 1 lop
+cho moi quy tac trong ngu phap. Do do ngu phap co chua nhieu
+quy tac co the kho quan ly va bao tri.
++, Khong quan tam nhieu ve hieu suat. Do bo ngu phap duoc phan
+tich trong cau truc cay phan cap nen hieu suat khong duoc dam
+bao.
+Interpreter thuong dc su dung trong trinh bien dich(compiler)
+dinh nghia cac bo ngu phap, rule, trinh phan tich sql, xml,...
