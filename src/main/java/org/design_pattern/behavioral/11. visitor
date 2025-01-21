@@ -1,0 +1,93 @@
+Truoc khi tim hieu visitor pattern thi cung nhau tim hieu 2 khai
+niem: Single Dispatch va Double Dispatch la gi?
+1. Single dispatch?
+<code vi du o folder duoi>
+Trong Java, chung ta co the dinh nghia cac phuong thuc cung ten nhung
+khac nhau ve tham so(tinh da hinh). Mot phuong thuc duoc goi se dua
+tren 2 yeu to: ten cua phuong thuc va kieu doi tuong goi no. Co che
+nay goi la SingleDispatch.
+
+Do trong vidu code tren ta tao ra 3 phuong thuc co ten giong het
+nhau, tuy nhien truyen vao tham so la 3 kieu doi tuong khac nhau nen khi
+ta cast kieu thi truyen vao thi phuong thuc ta muon goi no khong
+an... -> phai dung instanceof de check kieu doi tuong truyen vao.
+2. Double dispatch?
+Ngoai cach su dung instanceof, ta co the su dung ki thuat Double
+Dispatch. Trong Double Dispatch, 1 phuong thuc se duoc goi dua
+tren 3 yeu to: ten cua phuong thuc, kieu cua ca doi tuong goi va
+kieu cua doi so truyen vao.
+---> de hieu phan ap dung thi cung nhau tim hieu visitor Pattern.
+
+
+
+======================= VISITOR PATTERN ======================
+1. LY THUYET
+Visitor la mot trong nhung pattern thuoc nhom hanh vi. Visitor cho
+phep dinh nghia cac thao tac(operations) tren 1 tap hop cac doi
+tuong(objects) khong dong nhat(ve kieu) ma khong lam thay doi
+dinh nghia ve lop(classes) cua cac doi tuong do. De dat dc dieu
+nay, trong mau thiet ke visitor ta dinh nghia cac thao tac tren
+cac lop tach biet goi cac lop visitors, cac lop nay cho phep
+tach roi cac thao tac voi cac doi tuong ma no tac dong den. Voi
+moi thao tac duoc them vao, 1 lop visitor tuong ung dc tao ra.
+Day la 1 ky thuat giup chung ta phuc hoi lai kieu du lieu bi mat
+(thay vi dung instanceof). No thuc hien dung thao tac dua tren
+ten cua phuong thuc, kieu cua ca doi tuong goi va kieu cua
+doi so truyen vao.
+Visitor con dc biet den la Double dispatch.
+
+===================
+2. CAI DAT
+Cac thanh phan chinh:
++ Visitor:
+    La 1 interface hoac 1 abstract class duoc su dung de khai bao
+    cac hanh vi cho tat ca cac loai visitor.
+    Class nay dinh nghia 1 loat cac phuong phap truy cap chap nhan
+    cac ConcreteElement cu the khac nhau lam tham so. Dieu nay giong
+    voi co che nap chong nhung ccac loai tham so nen khac nhau do do
+    cac hanh vi hoan toan khac nhau. Cac hanh vi truy cap se dc
+    thuc hien tren tung phan cu the trong cau truc doi tuong thong
+    qua phuong thuc visit(). Loai phan tu cu the dau vao se quyet
+    dinh phuong thuc dc goi.
++ ConcreteVisitor:
+    Cai dat tat ca cac phuong thuc abstract da khai bao trong visitor.
+    Moi visitor se chiu trach nhiem cho cac hanh vi khac nhau cua
+    doi tuong.
++ Element: La mot thanh phan truu tuong. no khai bao phuong thuc
+    accept() va chap nhan doi so la Visitor.
++ ConcreteElement:
+    Cai dat phuong thuc da dc khai bao trong Element dua vao doi
+    so visitor dc cung cap.
++ ObjectStructure:
+    la 1 lop chua tat ca cac doi tuong Element, cung cap 1 co
+    che de duyet qua tat cac cac phan tu. Cau truc doi tuong nay
+    co the la 1 tap hop hoac 1 cau truc phuc tap giong nhu 1 doi tuong
+    tong hop.
++ Client: khong biet ve ConcreteElement va chi goi phuong thuc
+    accept() cua Element.
+
+==========================
+VI DU:
+<nam trong folder duoi>
+
+==========================
+LOI ICH:
+Visitor Pattern cho phep 1 hoac nhieu hanh vi dc ap dung cho 1 tap
+hop cac doi tuong tai thoi diem run-time, tach roi cac hanh vi khoi
+cau truc doi tuong.
+Dam bao nguyen tac Open/close: doi tuong goc khong bi thay doi, de
+dang them hanh vi moi cho doi tuong thong qua visitor.
+
+===========================
+SU DUNG KHI NAO?
+Khi co 1 cau truc doi tuong phuc tap vs nhieu class va interface
+nguoi dung can thuc hien 1 so hanh vi cu the cua rieng doi tuong.
+tuy thuoc vao concrete class cua chung.
+Khi muon tranh su dung toan tu instanceof.
+Khi cau truc du lieu cuadoi tuong it khi thay doi nhung hanh vi cua
+chung dc thay doi thuong xuyen
+Khi chung ta phai thuc hien 1 thao tac tren 1 nhom cac loai doi tuong
+tuong tu. Chung ta co the di chuyen logic hanh vi tu cac doi tuong
+sang 1 lop khac.
+
+
